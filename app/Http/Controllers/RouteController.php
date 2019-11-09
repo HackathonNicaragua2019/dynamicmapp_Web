@@ -17,7 +17,7 @@ class RouteController extends Controller
      */
     public function index()
     {
-        return Route::all();
+        return Route::paginate();
     }
 
     /**
