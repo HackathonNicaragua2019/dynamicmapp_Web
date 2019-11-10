@@ -9,6 +9,8 @@ use Grimzy\LaravelMysqlSpatial\Types\LineString;
 
 $factory->define(Route::class, function (Faker $faker) {
     return [
+        'name' => $faker->streetName,
+        'description' => $faker->streetAddress,
         'start' => new Point($faker->latitude(12.14,12.92),$faker->longitude(-86,-84)),
         'end' => new Point($faker->latitude(12.14,13.92),$faker->longitude(-86,-84)),
         'route' => new LineString([
