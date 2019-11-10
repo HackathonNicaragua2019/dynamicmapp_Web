@@ -10,6 +10,8 @@ class Route extends Model
     use SpatialTrait;
     
     protected $fillable=[
+        'name',
+        'description',
         'start',
         'end',
         'route',

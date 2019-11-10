@@ -11,6 +11,8 @@ Enpoints destinados al modulo de rutas:
     * endpoint: `api/routes`
     * type: post
     * Parametros:
+        * name: Campo de texto para nombrar la ruta
+        * description: Campo de texto para describir la ruta
         * start: Punto de geolocalización
         * end: Punto de geolocalización
         * route: Arreglo de puntos de geolocalización
@@ -20,6 +22,8 @@ Enpoints destinados al modulo de rutas:
 * Editar
     * endpoint: `api/routes/{id}`
     * type: put
+        * name: Campo de texto para nombrar la ruta
+        * description: Campo de texto para describir la ruta
         * start: Punto de geolocalización
         * end: Punto de geolocalización
         * route: Arreglo de puntos de geolocalización
