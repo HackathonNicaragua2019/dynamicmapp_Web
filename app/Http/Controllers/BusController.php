@@ -25,8 +25,8 @@ class BusController extends Controller
      */
     public function store(Request $request)
     {
-        $route=Bus::create($request->all());
-        return response()->json($route, 201);
+        $bus=Bus::create($request->all());
+        return response()->json($bus, 201);
     }
 
     /**
