@@ -10,6 +10,7 @@ class Bus extends Model
 {
     protected $fillable=[
         'name',
+        'description',
         'license_plate',
         'device_id',
     ];
