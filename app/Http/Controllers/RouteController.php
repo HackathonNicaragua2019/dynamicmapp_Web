@@ -51,6 +51,7 @@ class RouteController extends Controller
      */
     public function show(Route $route)
     {
+        $route->stops()->get();
         return $route;
     }
 
@@ -63,6 +64,8 @@ class RouteController extends Controller
      */
     public function update(Request $request, Route $route)
     {
+        $route->update($request->all());
+
         if($request->has('start')) 
             $route->start=Geometry::fromJson($request->start);
 

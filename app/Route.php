@@ -9,12 +9,11 @@ class Route extends Model
 {
     use SpatialTrait;
     
+    protected $appends = ['stops'];
+
     protected $fillable=[
         'name',
         'description',
-        'start',
-        'end',
-        'route',
     ];
     
     protected $spatialFields=[
@@ -29,5 +28,18 @@ class Route extends Model
     public function buses()
     {
         return $this->belongsToMany('App\Bus')->using('App\BusRoute');
+    }
+
+    /**
+     * Los paradas que pertenecen a la ruta.
+     */
+    public function stops()
+    {
+        return $this->hasMany('App\Stop');
+    }
+
+    public function getStopsAttribute()
+    {
+        return $this->stops()->get();
     }
 }

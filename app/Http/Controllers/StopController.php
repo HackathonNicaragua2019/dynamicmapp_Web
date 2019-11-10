@@ -57,9 +57,8 @@ class StopController extends Controller
      */
     public function update(Request $request, Stop $stop)
     {
-        if($request->has('position')) 
-            $stop->position=Geometry::fromJson($request->position);
-        
+        $stop->update($request->all());
+        if($request->has('position')) $stop->position=Geometry::fromJson($request->position);
         $stop->save();
         return response()->json($stop, 200);
     }
