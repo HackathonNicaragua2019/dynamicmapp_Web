@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusesTable extends Migration
+class CreateStopsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateBusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('buses', function (Blueprint $table) {
+        Schema::create('stops', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
-            $table->string('license_plate',10)->nullable();
-            $table->unsignedBigInteger('device_id')->unique()->nullable();
-            $table->softDeletes();
+            $table->point('position');
+            $table->unsignedBigInteger('route_id')->nullable();
+            $table->foreign('route_id')->references('id')->on('routes')->onDelete('cascade');;
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateBusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buses');
+        Schema::dropIfExists('stops');
     }
 }
