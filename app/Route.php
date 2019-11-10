@@ -14,9 +14,18 @@ class Route extends Model
         'end',
         'route',
     ];
+    
     protected $spatialFields=[
         'start',
         'end',
         'route',
     ];
+
+    /**
+     * Los buses que pertenecen a la ruta.
+     */
+    public function buses()
+    {
+        return $this->belongsToMany('App\Bus')->using('App\BusRoute');
+    }
 }
