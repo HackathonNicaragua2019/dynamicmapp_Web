@@ -13,6 +13,13 @@ class Bus extends Model
         'license_plate',
         'device_id',
     ];
+    
+    /**
+     * Valores calculados que se agregarán al arreglo del modelo
+     *
+     * @var array
+     */
+    protected $appends = ['position'];
 
     /**
      * Las rutas que pertenecen al autobús.
@@ -29,18 +36,24 @@ class Bus extends Model
      */
     public function getPositionAttribute()
     {
+        // Conección con la api traccar
         $client = new Client([
             'base_uri' => env('TRACCAR_HOST'),
-            'auth' => [env('TRACCAR_EMAIL'), env('TRACCAR_PASSWORD')]
+            'auth' => [env('TRACCAR_EMAIL'), env('TRACCAR_PASSWORD')],
         ]);
-        $response = $client->request('GET','api/positions');
-        $devices = Collect(json_decode($response->getBody()->getContents()));
-        $device = $devices->firstWhere('id',$this->device_id);
-        if(isset($device)){
-            $position = new Point($device->latitude,$device->longitude);
+        
+        // Obteniendo listas de distpositivos GPS
+        $response = $client->request('GET','api/devices');
+        $response = json_decode($response->getBody()->getContents());
+        $devices = Collect($response);
+        
+        // Si el bus tiene un dispositvo GPS se obtendrá su ultima ubicación
+        $device = $devices->firstWhere('uniqueId',$this->device_id);
+        if($device){
+            $response = $client->request('GET','api/positions',['query'=>['id' => $device->positionId]]);
+            $response = Collect(json_decode($response->getBody()->getContents()))->first();
+            $position = new Point($response->latitude,$response->longitude);
             return $position;
-        }else{
-            return response()->json('Dispositivo GPS no encontrado', 204);
         }
     }
 }
