@@ -52,3 +52,23 @@ Enpoints destinados al modulo de buses:
 * Eliminar 
     * endpoint: `api/buses/{id}`
     * type: delete
+
+### Paradas de autobuses
+Enpoints destinados al modulo de paradas de autobús:
+* Crear
+    * endpoint: `api/stops`
+    * type: post
+    * Parametros:
+        * position: Punto de geolocalización
+        * route_id: Id del la ruta asignada a esta parada
+* Mostrar
+    * endpoint: `api/stops/{id}`
+    * type: get
+* Editar
+    * endpoint: `api/stops/{id}`
+    * type: put
+        * position: Punto de geolocalización
+        * route_id: Id del la ruta asignada a esta parada
+* Eliminar 
+    * endpoint: `api/stops/{id}`
+    * type: delete
