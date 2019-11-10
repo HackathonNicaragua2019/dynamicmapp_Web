@@ -26,3 +26,25 @@ Enpoints destinados al modulo de rutas:
 * Eliminar 
     * endpoint: `api/routes/{id}`
     * type: delete
+
+### Buses
+Enpoints destinados al modulo de buses:
+* Crear
+    * endpoint: `api/buses`
+    * type: post
+    * Parametros:
+        * name: Nombre del autobús
+        * license_plate: Placa del autobús
+        * device_id: Id del dispositivo gps
+* Mostrar
+    * endpoint: `api/buses/{id}`
+    * type: get
+* Editar
+    * endpoint: `api/buses/{id}`
+    * type: put
+        * name: Nombre del autobús
+        * license_plate: Placa del autobús
+        * device_id: Id del dispositivo gps
+* Eliminar 
+    * endpoint: `api/buses/{id}`
+    * type: delete
